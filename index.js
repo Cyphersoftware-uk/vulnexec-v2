@@ -14,7 +14,7 @@ async function startup() {
     // Check if ip is provided
     if (args.includes('-target')) {
         const ip_index = args.indexOf('-target') + 1;
-        const ip = args[ip_index];
+        let ip = args[ip_index];
 
         // Check if its a single ip or a range
         if (ip.includes('/')) {
