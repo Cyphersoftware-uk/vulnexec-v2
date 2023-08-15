@@ -36,6 +36,9 @@ async function startup() {
             logging('Nmap not found, Installing...')
             execSync('sudo apt-get install nmap -y')
         }
+        stdout.on('data', (data) => {
+            logging(data)
+        })
     });
 
     // check if nmap-vulners is installed
