@@ -36,10 +36,7 @@ async function startup() {
     } catch (error) {
         logging('Nmap is not installed')
         logging('Installing Nmap...')
-        nmap_install = execSync('sudo apt install nmap -y')
-        nmap_install.stdout.on('data', (data) => {
-            console.log(data.toString());
-        });
+        nmap_install = execSync('sudo apt install nmap -y 2>&1 >/dev/null')
 
     }
 }
