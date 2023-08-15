@@ -30,7 +30,7 @@ async function startup() {
 
     console.clear()
     // Check if nmap is installed
-    execSync('nmap -V', (err, stdout, stderr) => {
+    execSync('nmap -V &> /dev/null', (err, stdout, stderr) => {
         if (err) {
             logging('Nmap not found, Installing...')
             execSync('sudo apt-get install nmap -y')
@@ -38,7 +38,7 @@ async function startup() {
     });
 
     // check if nmap-vulners is installed
-    execSync('nmap --script vulners -V', (err, stdout, stderr) => {
+    execSync('nmap --script vulners -V &> /dev/null', (err, stdout, stderr) => {
         if (err) {
             logging('Nmap-vulners not found, Installing...')
             execSync('sudo apt-get install nmap-vulners -y')
@@ -46,7 +46,7 @@ async function startup() {
     });
 
     // Check if metasploit is installed
-    execSync('msfconsole -v', (err, stdout, stderr) => {
+    execSync('msfconsole -v &> /dev/null', (err, stdout, stderr) => {
         if (err) {
             logging('Metasploit not found, Installing...')
             execSync('sudo apt-get install metasploit-framework -y')
