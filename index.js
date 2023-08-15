@@ -7,6 +7,27 @@ const logging = (msg) => { console.log(chalk.redBright('[VULNEXEC] ') + msg); }
 
 // startup function
 async function startup() {
+
+    // Get Process arguments
+    const args = process.argv.slice(2);
+
+    // Check if ip is provided
+    if (args.includes('-target')) {
+        const ip_index = args.indexOf('-target') + 1;
+        const ip = args[ip_index];
+
+        // Check if its a single ip or a range
+        if (ip.includes('/')) {
+            ip = ip_gen(ip)
+        } else {
+            ip = [ip]
+        }
+    } else {
+        logging(ip)
+        logging('No target provided')
+        process.exit(1)
+    }
+
     console.clear()
     // Check if nmap is installed
     execSync('nmap -V', (err, stdout, stderr) => {
@@ -33,23 +54,7 @@ async function startup() {
     });
 }
 
-// Get Process arguments
-const args = process.argv.slice(2);
-
-// Check if ip is provided
-if (args.includes('-target')) {
-    const ip_index = args.indexOf('-target') + 1;
-    const ip = args[ip_index];
-
-    // Check if its a single ip or a range
-    if (ip.includes('/')) {
-        let ip = ip_gen(ip)
-    } else {
-        let ip = [ip]
-    }
-} else {
-    logging('No target provided')
-    process.exit(1)
-}
 
 
+
+startup()
