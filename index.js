@@ -7,6 +7,7 @@ const logging = (msg) => { console.log(chalk.redBright('[VULNEXEC] ') + msg); }
 
 // startup function
 async function startup() {
+    logging('Starting VulnExec...')
 
     // Get Process arguments
     const args = process.argv.slice(2);
